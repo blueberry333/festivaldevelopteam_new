@@ -48,10 +48,13 @@ def comment_write(request, board_id):
     if request.method == 'POST':
         post = get_object_or_404(Board, pk=board_id)
         content = request.POST.get('content')
+        drop = request.POST.get('crowded')
+        print(drop)
+
 
     if not content:
         messages.info(request, 'You didnt write anything')
         return redirect('detail', board_id)
 
-    Comment.objects.create(post=post, comment_contents=content)
+    Comment.objects.create(post=post, comment_contents=content, dropdown=drop)
     return redirect('detail', board_id)
