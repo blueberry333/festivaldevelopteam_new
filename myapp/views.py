@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .models import Board
+from .models import Board, Comment
 
 from django.utils import timezone
+
+# from django.core.urlresolvers import reverse_lazy
 
 # Create your views here.
 
@@ -41,3 +43,15 @@ def update(request, board_id):
     board.pub_date = timezone.datetime.now()
     board.save()
     return redirect('/')
+
+def comment_write(request, board_id):
+    if request.method == 'POST':
+        post = get_object_or_404(Board, pk=board_id)
+        content = request.POST.get('content')
+
+    if not content:
+        messages.info(request, 'You didnt write anything')
+        return redirect('detail', board_id)
+
+    Comment.objects.create(post=post, comment_contents=content)
+    return redirect('detail', board_id)

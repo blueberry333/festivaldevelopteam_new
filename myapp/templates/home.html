@@ -2,7 +2,7 @@
 <br>
 <div class="navbar">
     <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-    <a class="nav-item nav-link" href="{% url 'new' %}">글쓰기</a>
+    <!-- <a class="nav-item nav-link" href="{% url 'new' %}">글쓰기</a> -->
 </div>
 {% for board in boards.all %}    
 <div class="container">
@@ -10,8 +10,8 @@
     <h1>{{ board.title }}</h1>
     </a>
     <p>{{ board.pub_date_pretty }}</p>
-    <p>본문 미리보기: {{ board.summary }}<a href="{% url 'detail' board.id %}">...more</a></p>
-    <p><a href="{% url 'edit' board.id %}">수정</a></p>
-    <p><a href="{% url 'delete' board.id %}" style='text-decoration:none;'>삭제</a></p>
+    <!-- <p>본문 미리보기: {{ board.summary }}<a href="{% url 'detail' board.id %}">...more</a></p> -->
+    <!-- <p><a href="{% url 'edit' board.id %}">수정</a></p> -->
+    <!-- <p><a href="{% url 'delete' board.id %}" style='text-decoration:none;'>삭제</a></p> -->
 </div>
 {% endfor %}

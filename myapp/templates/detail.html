@@ -1,9 +1,30 @@
-<h1>Detail page입니다.</h1>
-<br>
-
 <div class="container">
-    <h1>{{ board.title }}</h1>
-    <p>{{ board.pub_date }}</p>
-    <p>{{ board.body }}</p>
+    <h1>{{ board.title }}</h1> -->
+    <!-- <p>{{ board.pub_date }}</p> -->
+    <!-- <p>{{ board.body }}</p> -->
+    
+    <br>
+    <hr>
+    <!-- 댓글쓰는곳 -->
+    <form action="{% url 'comment_write' board_id=board.id %}" method="POST">
+        {% csrf_token %}
+        <input type="textarea" name="content" placeholder="Write your comments">
+        <input type="submit" value="Write" />
+    </form>
+    <hr>
+
+    <br>
+    <!-- 댓글목록 -->
+    {% for comment in board.comments.all %}
+        <div class="comment">
+          <p>{{ comment.comment_contents }}</p>
+        </div>
+
+    {% empty %}
+        <p>아직 댓글이 없습니다.</p>
+    {% endfor %}
+    
+        <br>
+    
     <a href="{% url 'home' %}">돌아가기</a>
 </div>
