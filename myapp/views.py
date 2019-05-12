@@ -49,7 +49,7 @@ def comment_write(request, board_id):
         post = get_object_or_404(Board, pk=board_id)
         content = request.POST.get('content')
         drop = request.POST.get('crowded')
-        print(drop)
+        # print(drop)
 
 
     if not content:

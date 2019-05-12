@@ -10,10 +10,10 @@
         {% csrf_token %}
         대기줄이 혼잡한가요?
         <select name="crowded">
-                <option value="모름">모름</option>
-                <option value="매우혼잡" selected>매우혼잡</option>
-                <option value="혼잡">혼잡</option>
-                <option value="보통">보통</option>
+                <option value="0" selected>모름</option>
+                <option value="1" style="background-color:red;">매우혼잡</option>
+                <option value="2" style="background-color: #F6BB43;">혼잡</option>
+                <option value="3" style="background-color: green;">보통</option>
         </select>
         <br>
         <input type="text" name="content" placeholder="">
@@ -25,7 +25,16 @@
     <!-- 댓글목록 -->
     {% for comment in board.comments.all %}
         <div class="comment">
-          {{ comment.dropdown }} | {{ comment.comment_contents }}
+        {% if comment.dropdown == "0" %}
+            <span style="width:50px;">모름</span>
+        {% elif comment.dropdown == "1" %}
+            <span style="background-color:red; width:50px;">매우혼잡</span>
+        {% elif comment.dropdown == "2" %}
+            <span style="background-color:#F6BB43; width:50px;">혼잡</span> 
+        {% else %}
+            <span style="background-color:green; width:50px;">보통</span>
+        {% endif %}
+        | {{ comment.comment_contents }}
         </div>
 
     {% empty %}
