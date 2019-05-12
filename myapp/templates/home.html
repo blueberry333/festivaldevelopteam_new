@@ -1,4 +1,4 @@
-<h1>Home page입니다.</h1>
+<h1>동아리 이름</h1>
 <br>
 <div class="navbar">
     <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
@@ -10,6 +10,23 @@
     <h1>{{ board.title }}</h1>
     </a>
     <p>{{ board.pub_date_pretty }}</p>
+    {% for comment in board.comments.all %}
+    <div class="comment">
+    {% if comment.dropdown == "0" %}
+    <span style="width:50px;">모름</span>
+    {% elif comment.dropdown == "1" %}
+    <span style="background-color:red; width:50px;">매우혼잡</span>
+    {% elif comment.dropdown == "2" %}
+    <span style="background-color:#F6BB43; width:50px;">혼잡</span> 
+    {% else %}
+    <span style="background-color:green; width:50px;">보통</span>
+    {% endif %}
+    | {{ comment.comment_contents }}
+</div>
+
+{% empty %}
+<p>아직 댓글이 없습니다.</p>
+{% endfor %}
     <!-- <p>본문 미리보기: {{ board.summary }}<a href="{% url 'detail' board.id %}">...more</a></p> -->
     <!-- <p><a href="{% url 'edit' board.id %}">수정</a></p> -->
     <!-- <p><a href="{% url 'delete' board.id %}" style='text-decoration:none;'>삭제</a></p> -->
