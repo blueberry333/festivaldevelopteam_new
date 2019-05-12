@@ -21,7 +21,7 @@
     {% else %}
     <span style="background-color:green; width:50px;">보통</span>
     {% endif %}
-    | {{ comment.comment_contents }}
+    | {{ comment.comment_contents |truncatechars:10 }}
 </div>
 
 {% empty %}
