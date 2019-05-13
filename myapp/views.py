@@ -58,15 +58,3 @@ def comment_write(request, board_id):
 
     Comment.objects.create(post=post, comment_contents=content, dropdown=drop)
     return redirect('detail', board_id)
-
-def home_comments(request):
-    if request.method == 'POST':
-        post = get_object_or_404(Board, pk=board_id)
-        content = request.POST.get('content')
-        drop = request.POST.get('crowded')
-    
-    Comment.objects.create(post=post, comment_contents=content, dropdown=drop)
-    return redirect('home.html')
-
-    # boards = Board.objects
-    # return render(request, 'home.html', {'boards': boards})
